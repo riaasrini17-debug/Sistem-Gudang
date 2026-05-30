@@ -121,7 +121,7 @@
 
                     <div class="col-span-2 bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-sm flex flex-col overflow-hidden">
                         <div class="flex justify-between items-center mb-6 shrink-0">
-                            <h4 class="font-black text-gray-900 tracking-tight">Tren Pergerakan Stok</h4>
+                            <h4 class="font-black text-gray-900 tracking-tight">Pergerakan Stok</h4>
                             <div class="bg-gray-50 px-3 py-1.5 rounded-xl border border-gray-100 text-[10px] font-bold text-gray-500 uppercase tracking-widest">7 Hari Terakhir</div>
                         </div>
                         <div class="flex-1 min-h-0 relative">
@@ -167,8 +167,20 @@
             data: {
                 labels: ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'],
                 datasets: [
-                    { label: 'Keluar', data: [12, 19, 3, 5, 2, 3, 7], backgroundColor: '#CBD5E1', borderRadius: 12, barThickness: 12 },
-                    { label: 'Masuk', data: [15, 12, 10, 8, 12, 15, 20], backgroundColor: '#1E293B', borderRadius: 12, barThickness: 12 }
+                    { 
+                        label: 'Keluar', 
+                        data: {!! json_encode($chartKeluar) !!}, 
+                        backgroundColor: '#CBD5E1', 
+                        borderRadius: 12, 
+                        barThickness: 12 
+                    },
+                    { 
+                        label: 'Masuk', 
+                        data: {!! json_encode($chartMasuk) !!}, 
+                        backgroundColor: '#1E293B', 
+                        borderRadius: 12, 
+                        barThickness: 12 
+                    }
                 ]
             },
             options: {

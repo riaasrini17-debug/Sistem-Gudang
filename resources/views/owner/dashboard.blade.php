@@ -51,10 +51,6 @@
                 <div class="px-4 py-2 mt-2">
                     <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2 ml-2">Manajemen</p>
                     <div class="space-y-1">
-                        <a href="{{ route('owner.supplier') }}" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-gray-900 hover:bg-gray-50 rounded-2xl text-sm font-medium transition-all">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                            Supplier
-                        </a>
                         <a href="{{ route('owner.users') }}" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-gray-900 hover:bg-gray-50 rounded-2xl text-sm font-medium transition-all">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
                             Kelola User
@@ -109,11 +105,6 @@
                 <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
                     <p class="text-gray-500 text-sm font-medium">Total Barang</p>
                     <h2 class="text-3xl font-bold text-gray-900 mt-1">{{ $totalBarang }}</h2>
-                </div>
-
-                <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
-                    <p class="text-gray-500 text-sm font-medium">Total Kategori</p>
-                    <h2 class="text-3xl font-bold text-gray-900 mt-1"> {{ number_format($nilaiInventaris / 1000000, 1) }} </h2>
                 </div>
                 
                 <div class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
@@ -183,13 +174,13 @@
                 datasets: [
                     {
                         label: 'Masuk',
-                        data: [12, 19, 3, 5, 2, 3, 9],
+                        data: {!! json_encode($chartMasuk) !!},
                         backgroundColor: '#BFDBFE',
                         borderRadius: 4,
                     },
                     {
                         label: 'Keluar',
-                        data: [5, 10, 8, 2, 6, 1, 4],
+                        data: {!! json_encode($chartKeluar) !!},
                         backgroundColor: '#E5E7EB',
                         borderRadius: 4,
                     }
