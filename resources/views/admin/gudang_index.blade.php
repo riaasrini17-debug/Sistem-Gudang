@@ -167,7 +167,7 @@
             document.getElementById('edit_kode').value = barang.kode_barang;
             document.getElementById('edit_stok').value = barang.stok;
             document.getElementById('edit_stok_min').value = barang.stok_minimum;
-            document.getElementById('edit_supplier').value = barang.supplier ?? '';
+            document.getElementById('edit_supplier').value = barang.supplier ? barang.supplier.nama_supplier : '';
         }
         function closeEditModal() {
             document.getElementById('editModal').classList.add('hidden');
