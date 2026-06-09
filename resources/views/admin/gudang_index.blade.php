@@ -65,7 +65,12 @@
         <main class="flex-1 flex flex-col h-full overflow-hidden">
             <!-- Header Topbar -->
             <header class="h-16 flex items-center justify-between px-8 border-b border-gray-50 bg-white shrink-0">
-                <button class="text-gray-400"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg></button>
+                <div class="flex items-center gap-3 flex-1 max-w-sm">
+                    <div class="relative w-full">
+                        <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11A6 6 0 115 11a6 6 0 0112 0z"/></svg>
+                        <input id="searchBarang" type="text" placeholder="Cari nama atau kode barang..." class="w-full pl-9 pr-4 py-2 text-sm bg-gray-50 border border-gray-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all">
+                    </div>
+                </div>
                 <div class="flex items-center gap-3">
                     <div class="text-right">
                         <p class="text-xs font-black text-gray-900 uppercase tracking-tighter">{{ auth()->user()->name }}</p>
@@ -93,13 +98,13 @@
                                     <th class="w-24 px-6 py-5 text-right">Aksi</th>
                                 </tr>
                             </thead>
-                            <tbody class="divide-y divide-gray-50">
+                            <tbody id="tabelBarang" class="divide-y divide-gray-50">
                                 @forelse($barangs as $b)
                                 <tr class="hover:bg-gray-50/50 transition-colors">
                                     <td class="w-16 px-6 py-5 text-center font-mono text-[11px] text-gray-400">#{{ $b->id }}</td>
                                     <td class="px-6 py-5">
-                                        <p class="font-bold text-gray-900">{{ $b->nama_barang }}</p>
-                                        <p class="text-[10px] font-mono text-blue-600 font-bold uppercase tracking-tighter">{{ $b->kode_barang }}</p>
+                                        <p class="nama-barang font-bold text-gray-900">{{ $b->nama_barang }}</p>
+                                        <p class="kode-barang text-[10px] font-mono text-blue-600 font-bold uppercase tracking-tighter">{{ $b->kode_barang }}</p>
                                     </td>
                                     <td class="w-40 px-6 py-5 text-xs font-medium text-gray-600">
                                         {{ $b->supplier->nama_supplier ?? '-' }}
@@ -131,6 +136,14 @@
                                 @endforelse
                             </tbody>
                         </table>
+                        <!-- Pesan saat hasil search kosong -->
+                        <div id="emptySearch" class="hidden py-20 text-center">
+                            <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-gray-50 mb-3">
+                                <svg class="w-7 h-7 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-4.35-4.35M17 11A6 6 0 115 11a6 6 0 0112 0z"/></svg>
+                            </div>
+                            <p class="text-sm font-bold text-gray-400">Barang tidak ditemukan</p>
+                            <p class="text-xs text-gray-300 mt-1">Coba kata kunci yang berbeda</p>
+                        </div>
                     </div>
                 </div>
 
@@ -160,6 +173,27 @@
     </div>
 
     <script>
+        // ===== SEARCH BARANG =====
+        document.getElementById('searchBarang').addEventListener('input', function () {
+            const keyword = this.value.toLowerCase().trim();
+            const rows    = document.querySelectorAll('#tabelBarang tr');
+            let visible   = 0;
+
+            rows.forEach(row => {
+                const nama = row.querySelector('.nama-barang')?.textContent.toLowerCase() ?? '';
+                const kode = row.querySelector('.kode-barang')?.textContent.toLowerCase() ?? '';
+                if (nama.includes(keyword) || kode.includes(keyword)) {
+                    row.style.display = '';
+                    visible++;
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+
+            document.getElementById('emptySearch').classList.toggle('hidden', visible > 0);
+        });
+
+        // ===== MODAL EDIT =====
         function openEditModal(barang) {
             document.getElementById('editModal').classList.remove('hidden');
             document.getElementById('editModal').classList.add('flex');
