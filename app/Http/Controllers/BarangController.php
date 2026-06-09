@@ -37,7 +37,7 @@ class BarangController extends Controller
 
     public function index()
     {
-        $barangs = Barang::with('supplier')->latest()->get();
+        $barangs = Barang::with('supplier')->orderBy('id', 'asc')->get();
         return view('admin.gudang_index', compact('barangs'));
     }
 
