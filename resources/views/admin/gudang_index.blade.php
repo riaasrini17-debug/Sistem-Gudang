@@ -81,24 +81,23 @@
                 
                 <!-- KOLOM KIRI: TABEL UTAMA -->
                 <div class="flex-1 bg-white rounded-[2.5rem] border border-gray-100 shadow-sm flex flex-col overflow-hidden h-full">
-                    <!-- Table Header -->
-                    <div class="bg-gray-50/50 border-b border-gray-100 flex shrink-0 text-[10px] font-black text-gray-400 uppercase tracking-widest">
-                        <div class="w-16 px-6 py-5 text-center">ID</div>
-                        <div class="flex-1 px-6 py-5">Detail Produk</div>
-                        <div class="w-40 px-6 py-5">Supplier</div>
-                        <div class="w-24 px-6 py-5 text-center">Stok</div>
-                        <div class="w-32 px-6 py-5 text-right">Status</div>
-                        <div class="w-24 px-6 py-5 text-right">Aksi</div>
-                    </div>
-                    
-                    <!-- Table Body -->
                     <div class="flex-1 overflow-y-auto custom-scrollbar">
-                        <table class="w-full text-left">
+                        <table class="w-full text-left table-fixed">
+                            <thead>
+                                <tr class="bg-gray-50/50 border-b border-gray-100 text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                                    <th class="w-16 px-6 py-5 text-center">ID</th>
+                                    <th class="px-6 py-5">Detail Produk</th>
+                                    <th class="w-40 px-6 py-5">Supplier</th>
+                                    <th class="w-24 px-6 py-5 text-center">Stok</th>
+                                    <th class="w-32 px-6 py-5 text-right">Status</th>
+                                    <th class="w-24 px-6 py-5 text-right">Aksi</th>
+                                </tr>
+                            </thead>
                             <tbody class="divide-y divide-gray-50">
                                 @forelse($barangs as $b)
                                 <tr class="hover:bg-gray-50/50 transition-colors">
                                     <td class="w-16 px-6 py-5 text-center font-mono text-[11px] text-gray-400">#{{ $b->id }}</td>
-                                    <td class="flex-1 px-6 py-5">
+                                    <td class="px-6 py-5">
                                         <p class="font-bold text-gray-900">{{ $b->nama_barang }}</p>
                                         <p class="text-[10px] font-mono text-blue-600 font-bold uppercase tracking-tighter">{{ $b->kode_barang }}</p>
                                     </td>
@@ -113,16 +112,18 @@
                                             <span class="px-2 py-0.5 bg-green-100 text-green-600 rounded-md text-[9px] font-black uppercase">Aman</span>
                                         @endif
                                     </td>
-                                    <td class="w-24 px-6 py-5 text-right flex justify-end gap-2">
-                                        <button onclick="openEditModal({{ json_encode($b) }})" class="text-blue-500 hover:text-blue-700">
-                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                                        </button>
-                                        <form action="{{ route('barang.hapus', $b->id) }}" method="POST" onsubmit="return confirm('Hapus barang ini?')">
-                                            @csrf @method('DELETE')
-                                            <button type="submit" class="text-red-500 hover:text-red-700">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                    <td class="w-24 px-6 py-5 text-right">
+                                        <div class="flex justify-end gap-2">
+                                            <button onclick="openEditModal({{ json_encode($b) }})" class="text-blue-500 hover:text-blue-700">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                                             </button>
-                                        </form>
+                                            <form action="{{ route('barang.hapus', $b->id) }}" method="POST" onsubmit="return confirm('Hapus barang ini?')">
+                                                @csrf @method('DELETE')
+                                                <button type="submit" class="text-red-500 hover:text-red-700">
+                                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                                </button>
+                                            </form>
+                                        </div>
                                     </td>
                                 </tr>
                                 @empty

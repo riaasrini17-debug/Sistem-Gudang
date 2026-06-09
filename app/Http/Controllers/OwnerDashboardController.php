@@ -101,12 +101,53 @@ class OwnerDashboardController extends Controller
         ]);
 
         User::create([
-            'name'     => $request->name,
-            'email'    => $request->email,
-            'role'     => $request->role,
-            'password' => bcrypt($request->password),
+            'name'      => $request->name,
+            'email'     => $request->email,
+            'role'      => $request->role,
+            'password'  => bcrypt($request->password),
+            'is_active' => true,
         ]);
 
         return redirect()->back()->with('success', 'Akun ' . $request->role . ' berhasil dibuat.');
+    }
+
+    public function updateUser(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        if ($user->role === 'owner') abort(403);
+
+        $request->validate([
+            'name'     => 'required|string|max:255',
+            'email'    => 'required|email|unique:users,email,' . $id,
+            'role'     => 'required|in:admin,staff',
+            'password' => 'nullable|min:6',
+        ]);
+
+        $user->name  = $request->name;
+        $user->email = $request->email;
+        $user->role  = $request->role;
+
+        if ($request->filled('password')) {
+            $user->password = bcrypt($request->password);
+        }
+
+        $user->save();
+
+        return redirect()->route('owner.users')->with('success', 'Data user berhasil diperbarui.');
+    }
+
+    public function toggleAktifUser($id)
+    {
+        $user = User::findOrFail($id);
+
+        if ($user->role === 'owner') abort(403);
+
+        $user->is_active = !$user->is_active;
+        $user->save();
+
+        $status = $user->is_active ? 'diaktifkan' : 'dinonaktifkan';
+
+        return redirect()->route('owner.users')->with('success', "Akun {$user->name} berhasil {$status}.");
     }
 }

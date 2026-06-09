@@ -39,6 +39,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Manajemen Kelola Akun User (Admin & Staff) oleh Owner
     Route::get('/owner/users', [OwnerDashboardController::class, 'kelolaUser'])->name('owner.users');
     Route::post('/owner/users/tambah', [OwnerDashboardController::class, 'storeUser'])->name('owner.users.store');
+    Route::put('/owner/users/edit/{id}', [OwnerDashboardController::class, 'updateUser'])->name('owner.users.update');
+    Route::patch('/owner/users/toggle/{id}', [OwnerDashboardController::class, 'toggleAktifUser'])->name('owner.users.toggle');
 
 
     // ==========================================
