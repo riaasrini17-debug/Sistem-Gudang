@@ -9,10 +9,6 @@ class Barang extends Model
 {
     use HasFactory;
 
-    // Tentukan nama tabel jika di database namanya bukan 'barangs'
-    // protected $table = 'barangs';
-
-    // 👇 GERBANG DIUBAH DAN DITAMBAH UNTUK MENAMPUNG ID RELASI 👇
     protected $fillable = [
     'nama_barang',
     'kategori',
@@ -21,17 +17,13 @@ class Barang extends Model
     'supplier_id',
     ];
 
-    /**
-     * Relasi ke Model Kategori (Banyak Barang termasuk dalam Satu Kategori)
-     */
+
     public function kategori()
     {
         return $this->belongsTo(Kategori::class, 'kategori_id');
     }
 
-    /**
-     * Relasi ke Model Supplier (Banyak Barang disuplai oleh Satu Supplier)
-     */
+
     public function supplier()
     {
         return $this->belongsTo(Supplier::class, 'supplier_id');
