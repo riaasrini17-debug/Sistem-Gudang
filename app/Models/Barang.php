@@ -14,11 +14,11 @@ class Barang extends Model
 
     // 👇 GERBANG DIUBAH DAN DITAMBAH UNTUK MENAMPUNG ID RELASI 👇
     protected $fillable = [
-        'nama_barang', 
-        'kategori', // Menggantikan 'kategori' agar beralih ke sistem ID Relasi, // Ditambahkan agar bisa mencatat supplier penyedia barang
-        'stok',
-        'stok_minimum',
-        'supplier_id',
+    'nama_barang',
+    'kategori',
+    'stok',
+    'stok_minimum',
+    'supplier_id',
     ];
 
     /**
