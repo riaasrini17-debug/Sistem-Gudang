@@ -226,55 +226,5 @@
     </script>
     </div>
 
-    <!-- SCRIPT UNTUK MENJALANKAN CHART -->
-    <script>
-        const ctx = document.getElementById('terlarisChart').getContext('2d');
-        
-        // Mengambil data dari Controller yang dilempar via compact()
-        const labelBarang = {!! json_encode($namaBarang) !!};
-        const dataTerjual = {!! json_encode($jumlahTerjual) !!};
-
-        new Chart(ctx, {
-            type: 'bar', // Bisa diganti 'line' atau 'pie' kalau mau coba-coba
-            data: {
-                labels: labelBarang,
-                datasets: [{
-                    label: 'Jumlah Barang Keluar (Unit)',
-                    data: dataTerjual,
-                    backgroundColor: [
-                        '#3B82F6', // Biru
-                        '#60A5FA', // Biru Muda
-                        '#93C5FD', // Biru Lebih Muda
-                        '#BFDBFE', // Biru Pucat
-                        '#DBEAFE'  // Biru Sangat Pucat
-                    ],
-                    borderWidth: 0,
-                    borderRadius: 6, // Biar ujung bar-nya tumpul keren
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false // Sembunyikan legenda biar lebih clean
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        grid: {
-                            borderDash: [5, 5] // Bikin garis grid putus-putus
-                        }
-                    },
-                    x: {
-                        grid: {
-                            display: false // Sembunyikan garis vertikal
-                        }
-                    }
-                }
-            }
-        });
-    </script>
 </body>
 </html>
