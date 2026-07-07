@@ -10,7 +10,7 @@ class Supplier extends Model
     use HasFactory;
 
     // Tentukan nama tabel di database
-    protected $table = 'supplier'; 
+    protected $table = 'supplier';
 
     // 👇 SESUAIKAN GERBANG FILLABLE DI SINI 👇
     protected $fillable = ['nama_supplier', 'nama_barang'];

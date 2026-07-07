@@ -10,10 +10,10 @@ class Kategori extends Model
     use HasFactory;
 
     // Tentukan nama tabel jika Laravel salah menebak jamak (plural) nya
-    protected $table = 'kategori'; 
+    protected $table = 'kategori';
 
     // Kolom yang diizinkan untuk diisi massal
-    protected $fillable = [ 'nama_kategori'];
+    protected $fillable = ['nama_kategori'];
 
     /**
      * Relasi: Satu kategori memiliki banyak barang (One to Many)
