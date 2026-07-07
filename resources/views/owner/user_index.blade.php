@@ -12,12 +12,13 @@
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans h-screen overflow-hidden flex">
 
-    <!-- ================= SIDEBAR KIRI ================= -->
+
     <aside class="w-64 bg-white border-r border-gray-100 flex flex-col shrink-0">
         <div class="h-16 flex items-center px-6 border-b border-gray-100">
             <div class="flex items-center gap-2 text-gray-900">
-                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
-                <span class="text-xl font-bold tracking-tight">StockWise</span>
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+                </div>
+                <span class="text-xl font-black tracking-tight">Gudangku</span>
             </div>
         </div>
 
@@ -138,13 +139,32 @@
                                 </td>
                                 
                                 <td class="px-6 py-4 text-center">
-                                    <span class="text-green-500 font-medium text-xs">Aktif</span>
+                                    @if($user->is_active)
+                                        <span class="text-green-500 font-medium text-xs">● Aktif</span>
+                                    @else
+                                        <span class="text-red-400 font-medium text-xs">● Nonaktif</span>
+                                    @endif
                                 </td>
                                 
                                 <td class="px-6 py-4 text-right space-x-3 text-xs font-medium">
                                     @if($user->role !== 'owner')
-                                        <button class="text-blue-600 hover:text-blue-800">Edit</button>
-                                        <button class="text-red-500 hover:text-red-700">Nonaktifkan</button>
+                                        {{-- Tombol Edit --}}
+                                        <button
+                                            onclick="bukaModalEdit({{ $user->id }}, '{{ addslashes($user->name) }}', '{{ $user->email }}', '{{ $user->role }}')"
+                                            class="text-blue-600 hover:text-blue-800">
+                                            Edit
+                                        </button>
+
+                                        {{-- Tombol Toggle Aktif/Nonaktif --}}
+                                        <form id="form-toggle-{{ $user->id }}" action="{{ route('owner.users.toggle', $user->id) }}" method="POST" class="inline">
+                                            @csrf
+                                            @method('PATCH')
+                                        </form>
+                                        <button type="button"
+                                            onclick="bukaModalKonfirmasi({{ $user->id }}, '{{ addslashes($user->name) }}', {{ $user->is_active ? 'true' : 'false' }})"
+                                            class="{{ $user->is_active ? 'text-red-500 hover:text-red-700' : 'text-green-600 hover:text-green-800' }}">
+                                            {{ $user->is_active ? 'Nonaktifkan' : 'Aktifkan' }}
+                                        </button>
                                     @else
                                         <span class="text-gray-300 italic">-</span>
                                     @endif
@@ -213,6 +233,155 @@
             </div>
         </main>
     </div>
+
+    <!-- ================= MODAL KONFIRMASI TOGGLE ================= -->
+    <div id="modal-konfirmasi" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/40 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl shadow-xl w-full max-w-sm mx-4 p-6">
+            <div class="flex flex-col items-center text-center gap-3 mb-6">
+                <div id="konfirmasi-icon" class="w-14 h-14 rounded-full flex items-center justify-center">
+                    <!-- icon diisi via JS -->
+                </div>
+                <h3 id="konfirmasi-judul" class="font-bold text-gray-900 text-base"></h3>
+                <p id="konfirmasi-pesan" class="text-sm text-gray-500 leading-relaxed"></p>
+            </div>
+            <div class="flex gap-3">
+                <button onclick="tutupModalKonfirmasi()"
+                    class="flex-1 px-4 py-2.5 text-sm font-medium text-gray-600 bg-gray-100 rounded-xl hover:bg-gray-200 transition-colors">
+                    Batal
+                </button>
+                <button id="konfirmasi-tombol-aksi" onclick="eksekusiToggle()"
+                    class="flex-1 px-4 py-2.5 text-sm font-medium text-white rounded-xl transition-colors shadow-sm">
+                    Konfirmasi
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= MODAL EDIT USER ================= -->
+    <div id="modal-edit" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/40 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl shadow-xl w-full max-w-md mx-4 p-6">
+            <div class="flex items-center justify-between mb-5">
+                <h3 class="font-bold text-gray-900 text-base">Edit Data User</h3>
+                <button onclick="tutupModalEdit()" class="text-gray-400 hover:text-gray-600">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+
+            <form id="form-edit" action="" method="POST" class="space-y-4">
+                @csrf
+                @method('PUT')
+
+                <div>
+                    <label class="block text-xs font-medium text-gray-700 mb-1">Nama Lengkap</label>
+                    <input type="text" id="edit-name" name="name" required
+                        class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-gray-700 mb-1">Email</label>
+                    <input type="email" id="edit-email" name="email" required
+                        class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-gray-700 mb-1">Role / Hak Akses</label>
+                    <select id="edit-role" name="role" required
+                        class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="admin">Admin (Akses Penuh Gudang)</option>
+                        <option value="staff">Staff (Akses Terbatas)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-gray-700 mb-1">Password Baru <span class="text-gray-400 font-normal">(kosongkan jika tidak ingin diubah)</span></label>
+                    <input type="password" name="password"
+                        class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        placeholder="Min. 6 karakter">
+                </div>
+
+                <div class="flex justify-end gap-3 pt-2">
+                    <button type="button" onclick="tutupModalEdit()"
+                        class="px-4 py-2 text-sm font-medium text-gray-600 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors">
+                        Batal
+                    </button>
+                    <button type="submit"
+                        class="px-4 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg hover:bg-gray-800 transition-colors shadow-sm">
+                        Simpan Perubahan
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let activeToggleId = null;
+
+        function bukaModalKonfirmasi(id, nama, isAktif) {
+            activeToggleId = id;
+
+            const icon    = document.getElementById('konfirmasi-icon');
+            const judul   = document.getElementById('konfirmasi-judul');
+            const pesan   = document.getElementById('konfirmasi-pesan');
+            const tombol  = document.getElementById('konfirmasi-tombol-aksi');
+
+            if (isAktif) {
+                icon.className  = 'w-14 h-14 rounded-full flex items-center justify-center bg-red-50';
+                icon.innerHTML  = `<svg class="w-7 h-7 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/></svg>`;
+                judul.textContent  = 'Nonaktifkan Akun';
+                pesan.textContent  = `Akun "${nama}" akan dinonaktifkan dan tidak bisa login. Kamu bisa mengaktifkannya kembali kapan saja.`;
+                tombol.className   = 'flex-1 px-4 py-2.5 text-sm font-medium text-white bg-red-500 hover:bg-red-600 rounded-xl transition-colors shadow-sm';
+                tombol.textContent = 'Nonaktifkan';
+            } else {
+                icon.className  = 'w-14 h-14 rounded-full flex items-center justify-center bg-green-50';
+                icon.innerHTML  = `<svg class="w-7 h-7 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>`;
+                judul.textContent  = 'Aktifkan Akun';
+                pesan.textContent  = `Akun "${nama}" akan diaktifkan kembali dan bisa login seperti biasa.`;
+                tombol.className   = 'flex-1 px-4 py-2.5 text-sm font-medium text-white bg-green-500 hover:bg-green-600 rounded-xl transition-colors shadow-sm';
+                tombol.textContent = 'Aktifkan';
+            }
+
+            const modal = document.getElementById('modal-konfirmasi');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function tutupModalKonfirmasi() {
+            const modal = document.getElementById('modal-konfirmasi');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            activeToggleId = null;
+        }
+
+        function eksekusiToggle() {
+            if (activeToggleId) {
+                document.getElementById('form-toggle-' + activeToggleId).submit();
+            }
+        }
+
+        // Tutup modal konfirmasi kalau klik backdrop
+        document.getElementById('modal-konfirmasi').addEventListener('click', function(e) {
+            if (e.target === this) tutupModalKonfirmasi();
+        });
+
+        function bukaModalEdit(id, name, email, role) {
+            document.getElementById('edit-name').value  = name;
+            document.getElementById('edit-email').value = email;
+            document.getElementById('edit-role').value  = role;
+            document.getElementById('form-edit').action = '/owner/users/edit/' + id;
+
+            const modal = document.getElementById('modal-edit');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function tutupModalEdit() {
+            const modal = document.getElementById('modal-edit');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // Tutup modal edit kalau klik backdrop
+        document.getElementById('modal-edit').addEventListener('click', function(e) {
+            if (e.target === this) tutupModalEdit();
+        });
+    </script>
 
 </body>
 </html>

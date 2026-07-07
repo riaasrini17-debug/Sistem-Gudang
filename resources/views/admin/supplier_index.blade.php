@@ -18,7 +18,7 @@
                 <div class="bg-black p-1.5 rounded-lg">
                     <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
                 </div>
-                <span class="text-xl font-black tracking-tight">StockWise</span>
+                <span class="text-xl font-black tracking-tight">Gudangku</span>
             </div>
 
             <nav class="flex-1 p-4 space-y-1">
@@ -87,35 +87,38 @@
                         </button>
                     </div>
 
-                    <div class="bg-gray-50/50 border-b border-gray-100 flex shrink-0 text-[10px] font-black text-gray-400 uppercase tracking-widest">
-                        <div class="flex-1 px-8 py-5">Nama Supplier</div>
-                        <div class="w-48 px-8 py-5">Nama Barang</div>
-                        <div class="w-24 px-8 py-5 text-right">Aksi</div>
-                    </div>
-                    
                     <div class="flex-1 overflow-y-auto custom-scrollbar">
-                        <table class="w-full text-left">
+                        <table class="w-full text-left table-fixed">
+                            <thead>
+                                <tr class="bg-gray-50/50 border-b border-gray-100 text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                                    <th class="px-8 py-5">Nama Supplier</th>
+                                    <th class="w-48 px-8 py-5">Nama Barang</th>
+                                    <th class="w-24 px-8 py-5 text-right">Aksi</th>
+                                </tr>
+                            </thead>
                             <tbody class="divide-y divide-gray-50">
                                 @forelse($suppliers ?? [] as $s)
                                 <tr class="hover:bg-gray-50/50 transition-colors">
-                                    <td class="flex-1 px-8 py-5">
+                                    <td class="px-8 py-5">
                                         <p class="font-bold text-gray-900">{{ $s->nama_supplier ?? 'PT. Sumber Rejeki' }}</p>
                                     </td>
                                     <td class="w-48 px-8 py-5 text-xs font-medium text-gray-600">{{ $s->nama_barang ?? 'Elektronik' }}</td>
-                                    <td class="w-24 px-8 py-5 text-right flex justify-end gap-2">
-                                        <button onclick="openModal('edit', {{ json_encode($s) }})" class="text-blue-500 hover:text-blue-700">
-                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                                        </button>
-                                        <form action="#" method="POST" onsubmit="return confirm('Hapus supplier ini?')">
-                                            @csrf @method('DELETE')
-                                            <button type="submit" class="text-red-500 hover:text-red-700">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                    <td class="w-24 px-8 py-5 text-right">
+                                        <div class="flex justify-end gap-2">
+                                            <button onclick="openModal('edit', {{ json_encode($s) }})" class="text-blue-500 hover:text-blue-700">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                                             </button>
-                                        </form>
+                                            <form action="#" method="POST" onsubmit="return confirm('Hapus supplier ini?')">
+                                                @csrf @method('DELETE')
+                                                <button type="submit" class="text-red-500 hover:text-red-700">
+                                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                                </button>
+                                            </form>
+                                        </div>
                                     </td>
                                 </tr>
                                 @empty
-                                <tr><td colspan="4" class="px-8 py-20 text-center text-gray-300 font-bold italic uppercase tracking-widest">Belum ada data supplier</td></tr>
+                                <tr><td colspan="3" class="px-8 py-20 text-center text-gray-300 font-bold italic uppercase tracking-widest">Belum ada data supplier</td></tr>
                                 @endforelse
                             </tbody>
                         </table>

@@ -20,7 +20,7 @@
                 <div class="bg-black p-1.5 rounded-lg">
                     <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
                 </div>
-                <span class="text-xl font-black tracking-tight">StockWise</span>
+                <span class="text-xl font-black tracking-tight">Gudangku</span>
             </div>
 
             <nav class="flex-1 p-4 space-y-1">
@@ -65,7 +65,12 @@
         <main class="flex-1 flex flex-col h-full overflow-hidden">
             <!-- Header Topbar -->
             <header class="h-16 flex items-center justify-between px-8 border-b border-gray-50 bg-white shrink-0">
-                <button class="text-gray-400"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg></button>
+                <div class="flex items-center gap-3 flex-1 max-w-sm">
+                    <div class="relative w-full">
+                        <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11A6 6 0 115 11a6 6 0 0112 0z"/></svg>
+                        <input id="searchBarang" type="text" placeholder="Cari nama atau kode barang..." class="w-full pl-9 pr-4 py-2 text-sm bg-gray-50 border border-gray-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all">
+                    </div>
+                </div>
                 <div class="flex items-center gap-3">
                     <div class="text-right">
                         <p class="text-xs font-black text-gray-900 uppercase tracking-tighter">{{ auth()->user()->name }}</p>
@@ -81,26 +86,25 @@
                 
                 <!-- KOLOM KIRI: TABEL UTAMA -->
                 <div class="flex-1 bg-white rounded-[2.5rem] border border-gray-100 shadow-sm flex flex-col overflow-hidden h-full">
-                    <!-- Table Header -->
-                    <div class="bg-gray-50/50 border-b border-gray-100 flex shrink-0 text-[10px] font-black text-gray-400 uppercase tracking-widest">
-                        <div class="w-16 px-6 py-5 text-center">ID</div>
-                        <div class="flex-1 px-6 py-5">Detail Produk</div>
-                        <div class="w-40 px-6 py-5">Supplier</div>
-                        <div class="w-24 px-6 py-5 text-center">Stok</div>
-                        <div class="w-32 px-6 py-5 text-right">Status</div>
-                        <div class="w-24 px-6 py-5 text-right">Aksi</div>
-                    </div>
-                    
-                    <!-- Table Body -->
                     <div class="flex-1 overflow-y-auto custom-scrollbar">
-                        <table class="w-full text-left">
-                            <tbody class="divide-y divide-gray-50">
+                        <table class="w-full text-left table-fixed">
+                            <thead>
+                                <tr class="bg-gray-50/50 border-b border-gray-100 text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                                    <th class="w-16 px-6 py-5 text-center">ID</th>
+                                    <th class="px-6 py-5">Detail Produk</th>
+                                    <th class="w-40 px-6 py-5">Supplier</th>
+                                    <th class="w-24 px-6 py-5 text-center">Stok</th>
+                                    <th class="w-32 px-6 py-5 text-right">Status</th>
+                                    <th class="w-24 px-6 py-5 text-right">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabelBarang" class="divide-y divide-gray-50">
                                 @forelse($barangs as $b)
                                 <tr class="hover:bg-gray-50/50 transition-colors">
                                     <td class="w-16 px-6 py-5 text-center font-mono text-[11px] text-gray-400">#{{ $b->id }}</td>
-                                    <td class="flex-1 px-6 py-5">
-                                        <p class="font-bold text-gray-900">{{ $b->nama_barang }}</p>
-                                        <p class="text-[10px] font-mono text-blue-600 font-bold uppercase tracking-tighter">{{ $b->kode_barang }}</p>
+                                    <td class="px-6 py-5">
+                                        <p class="nama-barang font-bold text-gray-900">{{ $b->nama_barang }}</p>
+                                        <p class="kode-barang text-[10px] font-mono text-blue-600 font-bold uppercase tracking-tighter">{{ $b->kode_barang }}</p>
                                     </td>
                                     <td class="w-40 px-6 py-5 text-xs font-medium text-gray-600">
                                         {{ $b->supplier->nama_supplier ?? '-' }}
@@ -113,16 +117,18 @@
                                             <span class="px-2 py-0.5 bg-green-100 text-green-600 rounded-md text-[9px] font-black uppercase">Aman</span>
                                         @endif
                                     </td>
-                                    <td class="w-24 px-6 py-5 text-right flex justify-end gap-2">
-                                        <button onclick="openEditModal({{ json_encode($b) }})" class="text-blue-500 hover:text-blue-700">
-                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                                        </button>
-                                        <form action="{{ route('barang.hapus', $b->id) }}" method="POST" onsubmit="return confirm('Hapus barang ini?')">
-                                            @csrf @method('DELETE')
-                                            <button type="submit" class="text-red-500 hover:text-red-700">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                    <td class="w-24 px-6 py-5 text-right">
+                                        <div class="flex justify-end gap-2">
+                                            <button onclick="openEditModal({{ json_encode($b) }})" class="text-blue-500 hover:text-blue-700">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                                             </button>
-                                        </form>
+                                            <form action="{{ route('barang.hapus', $b->id) }}" method="POST" onsubmit="return confirm('Hapus barang ini?')">
+                                                @csrf @method('DELETE')
+                                                <button type="submit" class="text-red-500 hover:text-red-700">
+                                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                                </button>
+                                            </form>
+                                        </div>
                                     </td>
                                 </tr>
                                 @empty
@@ -130,6 +136,14 @@
                                 @endforelse
                             </tbody>
                         </table>
+                        <!-- Pesan saat hasil search kosong -->
+                        <div id="emptySearch" class="hidden py-20 text-center">
+                            <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-gray-50 mb-3">
+                                <svg class="w-7 h-7 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-4.35-4.35M17 11A6 6 0 115 11a6 6 0 0112 0z"/></svg>
+                            </div>
+                            <p class="text-sm font-bold text-gray-400">Barang tidak ditemukan</p>
+                            <p class="text-xs text-gray-300 mt-1">Coba kata kunci yang berbeda</p>
+                        </div>
                     </div>
                 </div>
 
@@ -159,6 +173,27 @@
     </div>
 
     <script>
+        // ===== SEARCH BARANG =====
+        document.getElementById('searchBarang').addEventListener('input', function () {
+            const keyword = this.value.toLowerCase().trim();
+            const rows    = document.querySelectorAll('#tabelBarang tr');
+            let visible   = 0;
+
+            rows.forEach(row => {
+                const nama = row.querySelector('.nama-barang')?.textContent.toLowerCase() ?? '';
+                const kode = row.querySelector('.kode-barang')?.textContent.toLowerCase() ?? '';
+                if (nama.includes(keyword) || kode.includes(keyword)) {
+                    row.style.display = '';
+                    visible++;
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+
+            document.getElementById('emptySearch').classList.toggle('hidden', visible > 0);
+        });
+
+        // ===== MODAL EDIT =====
         function openEditModal(barang) {
             document.getElementById('editModal').classList.remove('hidden');
             document.getElementById('editModal').classList.add('flex');
@@ -167,7 +202,7 @@
             document.getElementById('edit_kode').value = barang.kode_barang;
             document.getElementById('edit_stok').value = barang.stok;
             document.getElementById('edit_stok_min').value = barang.stok_minimum;
-            document.getElementById('edit_supplier').value = barang.supplier ?? '';
+            document.getElementById('edit_supplier').value = barang.supplier ? barang.supplier.nama_supplier : '';
         }
         function closeEditModal() {
             document.getElementById('editModal').classList.add('hidden');

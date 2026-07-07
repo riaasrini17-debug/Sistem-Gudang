@@ -8,6 +8,16 @@
     <style>
         details > summary { list-style: none; }
         details > summary::-webkit-details-marker { display: none; }
+
+        @media print {
+            @page { margin: 1cm; }
+            aside, header, .no-print { display: none !important; }
+            body { overflow: auto !important; background: white !important; height: auto !important; }
+            #print-area { overflow: visible !important; }
+            main { padding: 16px !important; overflow: visible !important; }
+            .shadow-sm, .shadow-xl { box-shadow: none !important; }
+            #print-header { display: flex !important; }
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans h-screen overflow-hidden flex">
@@ -15,8 +25,9 @@
     <aside class="w-64 bg-white border-r border-gray-100 flex flex-col shrink-0">
         <div class="h-16 flex items-center px-6 border-b border-gray-100">
             <div class="flex items-center gap-2 text-gray-900">
-                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
-                <span class="text-xl font-bold tracking-tight">StockWise</span>
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+                </div>
+                <span class="text-xl font-black tracking-tight">Gudangku</span>
             </div>
         </div>
 
@@ -72,7 +83,7 @@
         </div>
     </aside>
 
-    <div class="flex-1 flex flex-col overflow-hidden bg-gray-50">
+    <div id="print-area" class="flex-1 flex flex-col overflow-hidden bg-gray-50">
         
         <header class="h-16 bg-white border-b border-gray-100 flex items-center px-6 md:px-8">
             <div class="flex items-center gap-4 ml-auto">
@@ -89,13 +100,20 @@
         </header>
 
         <main class="flex-1 overflow-y-auto p-6 md:p-8">
+
+            {{-- Header khusus cetak --}}
+            <div id="print-header" class="hidden items-center gap-3 mb-6 pb-4 border-b border-gray-300">
+                <svg class="w-8 h-8 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke-width="2" stroke-linejoin="round"/></svg>
+                <span class="text-xl font-bold tracking-tight text-gray-900">StockWise</span>
+                <span class="ml-auto text-xs text-gray-500">Dicetak pada: {{ now()->format('d M Y, H:i') }}</span>
+            </div>
             
             <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
                 <div>
                     <h1 class="text-2xl font-bold text-gray-900">Laporan Barang Masuk</h1>
                     <p class="text-sm text-gray-500 mt-1">Riwayat penerimaan stok barang dari supplier.</p>
                 </div>
-                <button onclick="window.print()" class="inline-flex items-center gap-2 bg-white border border-gray-200 text-gray-700 px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-gray-50 hover:text-blue-600 transition-colors shadow-sm">
+                <button onclick="window.print()" class="no-print inline-flex items-center gap-2 bg-white border border-gray-200 text-gray-700 px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-gray-50 hover:text-blue-600 transition-colors shadow-sm">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
                     Cetak Laporan
                 </button>
