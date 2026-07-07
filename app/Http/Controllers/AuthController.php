@@ -24,17 +24,14 @@ class AuthController extends Controller
 
             $user = Auth::user();
 
-
             if ($user->role === 'owner') {
                 return redirect()->route('owner.dashboard');
-            } 
-
-            elseif ($user->role === 'admin') {
+            } elseif ($user->role === 'admin') {
                 return redirect()->route('dashboard');
             }
+
             return redirect()->route('dashboard');
         }
-
 
         return back()->withErrors([
             'email' => 'Email atau password salah, silakan coba lagi.',
@@ -46,6 +43,7 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+
         return redirect()->route('login');
     }
 }

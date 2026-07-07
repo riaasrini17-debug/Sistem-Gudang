@@ -9,11 +9,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('supplier', function (Blueprint $table) {
-            $table->string('nama_supplier')->after('id'); 
+            $table->string('nama_supplier')->after('id');
             $table->text('nama_barang')->nullable()->after('nama_supplier');
         });
     }
-
 
     public function down(): void
     {

@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\OwnerDashboardController;
-use App\Http\Controllers\AuthController; 
+use Illuminate\Support\Facades\Route;
 
 // --- RUTE OTENTIKASI & TAMU ---
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
@@ -16,11 +16,11 @@ Route::get('/', function () {
 
 // --- RUTE MIDDLEWARE (WAJIB LOGIN) ---
 Route::middleware(['auth', 'verified'])->group(function () {
-    
+
     // ==========================================
     //          -- KHUSUS ROLE: OWNER --
     // ==========================================
-    
+
     // Dashboard Utama Owner
     Route::get('/owner/dashboard', [OwnerDashboardController::class, 'index'])->name('owner.dashboard');
 
@@ -42,11 +42,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::put('/owner/users/edit/{id}', [OwnerDashboardController::class, 'updateUser'])->name('owner.users.update');
     Route::patch('/owner/users/toggle/{id}', [OwnerDashboardController::class, 'toggleAktifUser'])->name('owner.users.toggle');
 
-
     // ==========================================
     //          -- KHUSUS ROLE: ADMIN --
     // ==========================================
-    
+
     // Dashboard Utama Admin
     Route::get('/admin/dashboard', [BarangController::class, 'dashboard'])->name('dashboard');
 
@@ -59,7 +58,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Fitur Alur Cepat Barang Masuk (Otomatis Tambah Kategori & Supplier)
     Route::get('/admin/barang-masuk', [BarangController::class, 'indexMasuk'])->name('barang.masuk');
     Route::post('/admin/barang-masuk', [BarangController::class, 'simpanBarangMasuk'])->name('barang.masuk.simpan');
-    
+
     // Fitur Barang Keluar
     // Fitur Barang Keluar
     Route::get('/admin/barang-keluar', [BarangController::class, 'barangKeluar'])->name('barang.keluar');
@@ -68,7 +67,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Manajemen Manual Kategori & Supplier Admin
     Route::get('/admin/supplier', [BarangController::class, 'indexSupplier'])->name('supplier.index');
     Route::get('/admin/kategori', [BarangController::class, 'indexKategori'])->name('kategori.index');
-    
+
     Route::post('/admin/supplier/simpan', [BarangController::class, 'simpanSupplier'])->name('supplier.simpan');
     Route::post('/admin/kategori/simpan', [BarangController::class, 'simpanKategori'])->name('kategori.simpan');
     Route::delete('/admin/kategori/hapus/{id}', [BarangController::class, 'hapusKategori'])->name('kategori.hapus');

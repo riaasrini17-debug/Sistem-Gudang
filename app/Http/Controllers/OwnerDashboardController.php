@@ -2,29 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Barang;
 use App\Models\Supplier;
-use App\Models\User;
 use App\Models\TransaksiKeluar;
+use App\Models\User;
+use Illuminate\Http\Request;
 
 class OwnerDashboardController extends Controller
 {
     public function index()
     {
-        if (auth()->user()->role !== 'owner') abort(403);
+        if (auth()->user()->role !== 'owner') {
+            abort(403);
+        }
 
-        $totalBarang   = Barang::count();
+        $totalBarang = Barang::count();
         $nilaiInventaris = 0;
-        $masukHariIni  = Barang::whereDate('updated_at', today())->sum('stok');
+        $masukHariIni = Barang::whereDate('updated_at', today())->sum('stok');
         $keluarHariIni = TransaksiKeluar::whereDate('created_at', today())->sum('jumlah');
-        $stokMenipis   = Barang::whereColumn('stok', '<=', 'stok_minimum')->get();
+        $stokMenipis = Barang::whereColumn('stok', '<=', 'stok_minimum')->get();
 
         // Data chart 7 hari
         $chartMasuk = $chartKeluar = [];
         for ($i = 6; $i >= 0; $i--) {
             $tgl = now()->subDays($i)->toDateString();
-            $chartMasuk[]  = Barang::whereDate('updated_at', $tgl)->sum('stok');
+            $chartMasuk[] = Barang::whereDate('updated_at', $tgl)->sum('stok');
             $chartKeluar[] = TransaksiKeluar::whereDate('created_at', $tgl)->sum('jumlah');
         }
 
@@ -36,23 +38,26 @@ class OwnerDashboardController extends Controller
     public function daftarBarang()
     {
         $barangs = Barang::with(['supplier'])->orderBy('id', 'desc')->get();
+
         return view('owner.barang_index', compact('barangs'));
     }
 
     public function laporanMasuk()
     {
         $barangMasuk = Barang::with(['supplier'])->latest()->get();
+
         return view('owner.laporan_masuk', compact('barangMasuk'));
     }
 
     public function laporanKeluar()
-        {
-            // Sambungkan ke TransaksiKeluar yang sudah dibuat admin
-            $barangKeluar = TransaksiKeluar::with('barang')->latest()->get();
-            return view('owner.laporan_keluar', compact('barangKeluar'));
-        }
+    {
+        // Sambungkan ke TransaksiKeluar yang sudah dibuat admin
+        $barangKeluar = TransaksiKeluar::with('barang')->latest()->get();
 
-        public function laporanTerlaris(Request $request)
+        return view('owner.laporan_keluar', compact('barangKeluar'));
+    }
+
+    public function laporanTerlaris(Request $request)
     {
         $periode = $request->get('periode', 'bulanan');
 
@@ -73,8 +78,8 @@ class OwnerDashboardController extends Controller
 
         $terlaris = $query->get();
 
-        $namaBarang    = $terlaris->map(fn($t) => $t->barang->nama_barang ?? '-')->toArray();
-        $jumlahTerjual = $terlaris->map(fn($t) => $t->total)->toArray();
+        $namaBarang = $terlaris->map(fn ($t) => $t->barang->nama_barang ?? '-')->toArray();
+        $jumlahTerjual = $terlaris->map(fn ($t) => $t->total)->toArray();
 
         return view('owner.laporan_terlaris', compact('namaBarang', 'jumlahTerjual', 'periode'));
     }
@@ -82,31 +87,33 @@ class OwnerDashboardController extends Controller
     public function daftarSupplier()
     {
         $suppliers = Supplier::orderBy('id', 'desc')->get();
+
         return view('owner.supplier_index', compact('suppliers'));
     }
 
     public function kelolaUser()
     {
         $users = User::all();
+
         return view('owner.user_index', compact('users'));
     }
 
     public function storeUser(Request $request)
     {
         $request->validate([
-            'name'     => 'required|string|max:255',
-            'email'    => 'required|email|unique:users,email',
-            'role'     => 'required|in:admin,staff',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'role' => 'required|in:admin,staff',
             'password' => 'required|min:6',
         ]);
 
         User::create([
-            'name'     => $request->name,
-            'email'    => $request->email,
-            'role'     => $request->role,
+            'name' => $request->name,
+            'email' => $request->email,
+            'role' => $request->role,
             'password' => bcrypt($request->password),
         ]);
 
-        return redirect()->back()->with('success', 'Akun ' . $request->role . ' berhasil dibuat.');
+        return redirect()->back()->with('success', 'Akun '.$request->role.' berhasil dibuat.');
     }
 }

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             // Ini untuk membedakan Admin dan Owner
-            $table->enum('role', ['admin', 'owner'])->default('admin'); 
+            $table->enum('role', ['admin', 'owner'])->default('admin');
             $table->rememberToken();
             $table->timestamps();
         });
