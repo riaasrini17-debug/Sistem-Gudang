@@ -101,7 +101,7 @@
 
         <main class="flex-1 overflow-y-auto p-6 md:p-8">
 
-            {{-- Header khusus cetak --}}
+
             <div id="print-header" class="hidden items-center gap-3 mb-6 pb-4 border-b border-gray-300">
                 <svg class="w-8 h-8 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke-width="2" stroke-linejoin="round"/></svg>
                 <span class="text-xl font-bold tracking-tight text-gray-900">StockWise</span>
