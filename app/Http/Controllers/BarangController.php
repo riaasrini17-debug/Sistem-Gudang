@@ -7,6 +7,7 @@ use App\Models\Kategori;
 use App\Models\Supplier;
 use App\Models\TransaksiKeluar;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class BarangController extends Controller
 {
@@ -40,6 +41,7 @@ class BarangController extends Controller
         $barangs = Barang::latest()->get();
 
         $barangs = Barang::with('supplier')->orderBy('id', 'asc')->get();
+
         return view('admin.gudang_index', compact('barangs'));
     }
 
@@ -50,15 +52,15 @@ class BarangController extends Controller
             'kategori' => 'required|string|max:255',
             'stok' => 'required|numeric|min:0',
         ]);
-        $kodeBarang = 'BRG-' . strtoupper(\Illuminate\Support\Str::random(5));
+        $kodeBarang = 'BRG-'.strtoupper(Str::random(5));
         Barang::create([
             'nama_barang' => $request->nama_barang,
             'kategori' => $request->kategori,
             'stok' => $request->stok,
-            'nama_barang'  => $request->nama_barang,
-            'kode_barang'  => $kodeBarang,
-            'kategori'     => $request->kategori,
-            'stok'         => $request->stok,
+            'nama_barang' => $request->nama_barang,
+            'kode_barang' => $kodeBarang,
+            'kategori' => $request->kategori,
+            'stok' => $request->stok,
             'stok_minimum' => $request->stok_minimum ?? 5,
         ]);
 
@@ -71,9 +73,9 @@ class BarangController extends Controller
             'nama_barang' => 'required|string|max:255',
             'kategori' => 'required|string|max:255',
             'stok' => 'required|numeric|min:0',
-            'stok'        => 'required|numeric|min:0',
+            'stok' => 'required|numeric|min:0',
             'kode_barang' => 'nullable|string|max:255',
-            'supplier'    => 'nullable|string|max:255',
+            'supplier' => 'nullable|string|max:255',
         ]);
         $barang = Barang::findOrFail($id);
 
@@ -87,11 +89,11 @@ class BarangController extends Controller
             'nama_barang' => $request->nama_barang,
             'kategori' => $request->kategori,
             'stok' => $request->stok,
-            'nama_barang'  => $request->nama_barang,
-            'kode_barang'  => $request->kode_barang,
-            'stok'         => $request->stok,
+            'nama_barang' => $request->nama_barang,
+            'kode_barang' => $request->kode_barang,
+            'stok' => $request->stok,
             'stok_minimum' => $request->stok_minimum ?? 5,
-            'supplier_id'  => $supplierId,
+            'supplier_id' => $supplierId,
         ]);
 
         return redirect()->back()->with('success', 'Data master barang berhasil diperbarui!');
@@ -139,15 +141,15 @@ class BarangController extends Controller
                 'kategori' => $request->nama_kategori,
             ]);
         } else {
-            $kodeBarang = 'BRG-' . strtoupper(\Illuminate\Support\Str::random(5));
+            $kodeBarang = 'BRG-'.strtoupper(Str::random(5));
             Barang::create([
                 'nama_barang' => $request->nama_barang,
                 'kategori' => $request->nama_kategori,
                 'stok' => $request->jumlah,
-                'nama_barang'  => $request->nama_barang,
-                'kode_barang'  => $kodeBarang,
-                'kategori'     => $request->nama_kategori,
-                'stok'         => $request->jumlah,
+                'nama_barang' => $request->nama_barang,
+                'kode_barang' => $kodeBarang,
+                'kategori' => $request->nama_kategori,
+                'stok' => $request->jumlah,
                 'stok_minimum' => 5,
                 'supplier_id' => $supplier->id,
             ]);
