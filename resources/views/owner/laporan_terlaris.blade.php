@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Barang Terlaris - Sistem Gudang</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Memanggil Library Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         details > summary { list-style: none; }
@@ -76,7 +75,7 @@
             </div>
         </aside>>
 
-    <!-- ================= AREA KANAN ================= -->
+
     <div class="flex-1 flex flex-col overflow-hidden bg-gray-50">
         
         <header class="h-16 bg-white border-b border-gray-100 flex items-center px-6 md:px-8">
@@ -95,13 +94,13 @@
 
         <main class="flex-1 overflow-y-auto p-6 md:p-8 flex flex-col gap-6">
 
-    {{-- Header --}}
+
     <div class="flex items-end justify-between shrink-0">
         <div>
             <h1 class="text-2xl font-bold text-gray-900">Statistik Barang Terlaris</h1>
             <p class="text-sm text-gray-500 mt-1">10 barang dengan pengeluaran tertinggi.</p>
         </div>
-        {{-- Filter Periode --}}
+
         <div class="flex bg-white border border-gray-200 rounded-2xl p-1 gap-1 shadow-sm">
             <a href="?periode=harian" 
                class="px-4 py-2 rounded-xl text-xs font-bold transition-all {{ $periode === 'harian' ? 'bg-gray-900 text-white shadow' : 'text-gray-400 hover:text-gray-700' }}">
@@ -119,7 +118,7 @@
     </div>
 
     @if(count($namaBarang) === 0)
-    {{-- Empty State --}}
+
     <div class="flex-1 bg-white rounded-2xl border border-gray-100 shadow-sm flex flex-col items-center justify-center gap-3">
         <div class="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center">
             <svg class="w-8 h-8 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
@@ -127,10 +126,10 @@
         <p class="text-sm font-bold text-gray-400">Belum ada data untuk periode ini</p>
     </div>
     @else
-    {{-- Layout 2 kolom --}}
+
     <div class="flex-1 min-h-0 grid grid-cols-5 gap-6">
 
-        {{-- Chart --}}
+
         <div class="col-span-3 bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col">
             <div class="flex items-center justify-between mb-6 shrink-0">
                 <h3 class="font-bold text-gray-900">Grafik Pengeluaran Teratas</h3>
@@ -143,7 +142,7 @@
             </div>
         </div>
 
-        {{-- Ranking List --}}
+
         <div class="col-span-2 bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col">
             <h3 class="font-bold text-gray-900 mb-4 shrink-0">Ranking Barang</h3>
             <div class="flex-1 overflow-y-auto space-y-3 pr-1">
