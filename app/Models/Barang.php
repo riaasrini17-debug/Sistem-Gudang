@@ -12,7 +12,7 @@ class Barang extends Model
     protected $fillable = [
         'nama_barang',
         'kode_barang',
-        'kategori', // Menggantikan 'kategori' agar beralih ke sistem ID Relasi, // Ditambahkan agar bisa mencatat supplier penyedia barang
+        'kategori',
         'stok',
         'stok_minimum',
         'supplier_id',
