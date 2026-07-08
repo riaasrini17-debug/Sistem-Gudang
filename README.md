@@ -59,11 +59,11 @@ Sistem ini memiliki dua peran pengguna:
 
 | Nama | NIM | Peran | Fitur yang Dikerjakan | Link Video |
 |------|-----|-------|-----------------------|------------|
-| Ria | [NIM] | Frontend + Auth | Halaman Login, Dashboard Admin, Dashboard Owner | [▶ Tonton](https://youtube.com/...) |
-| Nima | [NIM] | Backend | Barang Masuk, Barang Keluar (Admin) | [▶ Tonton](https://youtube.com/...) |
-| Indri | [NIM] | Full-stack | Daftar Barang Admin & Owner, Kelola User | [▶ Tonton](https://youtube.com/...) |
-| Dina | [NIM] | Backend | Manajemen Supplier, Manajemen Kategori | [▶ Tonton](https://youtube.com/...) |
-| Nayge | [NIM] | Frontend + Backend | Laporan Barang Masuk, Keluar & Terlaris | [▶ Tonton](https://youtube.com/...) |
+| Ria | [42430014] | Frontend + Auth | Halaman Login, Dashboard Admin, Dashboard Owner | [▶ Tonton](https://youtube.com/...) |
+| Nima | [42430030] | Backend | Barang Masuk, Barang Keluar (Admin) | [▶ Tonton](https://youtube.com/...) |
+| Indri | [42430010] | Full-stack | Daftar Barang Admin & Owner, Kelola User | [▶ Tonton](https://youtube.com/...) |
+| Dina | [42430004] | Backend | Manajemen Supplier, Manajemen Kategori | [▶ Tonton](https://youtube.com/...) |
+| Nayge | [42430024] | Frontend + Backend | Laporan Barang Masuk, Keluar & Terlaris | [▶ Tonton](https://youtube.com/...) |
 
 ---
 
@@ -86,28 +86,28 @@ Sistem ini memiliki dua peran pengguna:
 
 ## 5. Fitur MVP
 
-### ✅ Fitur Admin
+### Fitur Admin
 
 | Fitur | Status |
 |-------|--------|
-| Login & Logout (role-based) | ✅ Selesai |
-| Dashboard real-time (grafik 7 hari) | ✅ Selesai |
-| Daftar Barang (CRUD) | ✅ Selesai |
-| Barang Masuk (auto-create supplier & kategori) | ✅ Selesai |
-| Barang Keluar (validasi stok) | ✅ Selesai |
-| Manajemen Supplier | ✅ Selesai |
-| Manajemen Kategori | ✅ Selesai |
+| Login & Logout (role-based) |  Selesai |
+| Dashboard real-time (grafik 7 hari) |  Selesai |
+| Daftar Barang (CRUD) |  Selesai |
+| Barang Masuk (auto-create supplier & kategori) |  Selesai |
+| Barang Keluar (validasi stok) |  Selesai |
+| Manajemen Supplier |  Selesai |
+| Manajemen Kategori |  Selesai |
 
-### ✅ Fitur Owner
+###  Fitur Owner
 
 | Fitur | Status |
 |-------|--------|
-| Dashboard Owner (grafik + stok menipis) | ✅ Selesai |
-| Daftar Barang (read-only + info supplier) | ✅ Selesai |
-| Laporan Barang Masuk + Cetak | ✅ Selesai |
-| Laporan Barang Keluar + Cetak | ✅ Selesai |
-| Laporan Terlaris (filter Harian/Bulanan/Tahunan) | ✅ Selesai |
-| Kelola User (tambah Admin/Staff) | ✅ Selesai |
+| Dashboard Owner (grafik + stok menipis) |  Selesai |
+| Daftar Barang (read-only + info supplier) |  Selesai |
+| Laporan Barang Masuk + Cetak |  Selesai |
+| Laporan Barang Keluar + Cetak |  Selesai |
+| Laporan Terlaris (filter Harian/Bulanan/Tahunan) |  Selesai |
+| Kelola User (tambah Admin/Staff) |  Selesai |
 
 ---
 
@@ -120,7 +120,7 @@ Sistem ini memiliki dua peran pengguna:
 | Blade | Built-in | Template engine (Presentation Layer) |
 | Tailwind CSS | CDN | Styling komponen UI |
 | Chart.js | CDN | Grafik dashboard & laporan terlaris |
-| MySQL | >= 8.0 | Database relasional |
+| MySQL | >= 8.0 | Database phpmyadmin |
 | Eloquent ORM | Built-in | Query database & relasi antar model |
 | Laravel Pint | >= 1.x | PHP Linter — standarisasi format kode |
 | GitHub Actions | - | CI/CD — otomatis jalankan linter setiap push |
@@ -210,7 +210,7 @@ public function kategori() {
 
 ## 8. Design Patterns yang Digunakan
 
-### Pattern 1 — Strategy Pattern ⭐
+### Pattern 1 — Strategy Pattern 
 
 | Atribut | Detail |
 |---------|--------|
@@ -242,7 +242,7 @@ if (Auth::attempt($credentials)) {
 
 ---
 
-### Pattern 2 — Factory Method Pattern ⭐
+### Pattern 2 — Factory Method Pattern 
 
 | Atribut | Detail |
 |---------|--------|
@@ -275,7 +275,7 @@ Barang::create([
 
 ---
 
-### Pattern 3 — Singleton Pattern ⭐
+### Pattern 3 — Singleton Pattern 
 
 | Atribut | Detail |
 |---------|--------|
@@ -453,7 +453,7 @@ php artisan db:seed
 php artisan serve
 ```
 
-✅ Akses aplikasi di: **`http://127.0.0.1:8000`**
+ Akses aplikasi di: **`http://127.0.0.1:8000`**
 
 ### Akun Default
 
@@ -538,9 +538,9 @@ main          ← Production (kode stabil final)
 
 ### Aturan GitFlow
 
-- ✅ Setiap fitur dikerjakan di branch `feature/nama-fitur`
-- ✅ Merge ke `develop` wajib melalui Pull Request
-- ✅ PR harus di-approve minimal 1 rekan tim sebelum di-merge
+-  Setiap fitur dikerjakan di branch `feature/nama-fitur`
+-  Merge ke `develop` wajib melalui Pull Request
+-  PR harus di-approve minimal 1 rekan tim sebelum di-merge
 
 ### Format Conventional Commits
 
@@ -570,11 +570,9 @@ chore(gitignore): tambah file shortcut Windows
 
 ---
 
-## 15. Dokumentasi Tambahan
+## 15. ERD Sederhana
 
-- 📁 Diagram arsitektur sistem tersedia di `docs/arsitektur.png`
-- 📁 Diagram ERD database tersedia di `docs/erd.png`
-- 📁 Diagram UML (dari UTS) tersedia di `docs/uml.png`
+![ERD Sistem Gudang](docs/erd.png.jpeg)
 
 ---
 
@@ -582,20 +580,20 @@ chore(gitignore): tambah file shortcut Windows
 
 | Komponen | Status |
 |----------|--------|
-| Autentikasi & Otorisasi Role | ✅ Selesai |
-| Dashboard Admin (grafik real-time) | ✅ Selesai |
-| Dashboard Owner | ✅ Selesai |
-| Manajemen Barang (CRUD) | ✅ Selesai |
-| Barang Masuk (auto-create supplier & kategori) | ✅ Selesai |
-| Barang Keluar (validasi stok) | ✅ Selesai |
-| Manajemen Supplier | ✅ Selesai |
-| Manajemen Kategori | ✅ Selesai |
-| Laporan Barang Masuk | ✅ Selesai |
-| Laporan Barang Keluar | ✅ Selesai |
-| Laporan Barang Terlaris (filter periode) | ✅ Selesai |
-| Kelola User (owner) | ✅ Selesai |
-| Linter CI/CD (GitHub Actions) | ✅ Selesai |
-| GitFlow & Pull Request | ✅ Selesai |
+| Autentikasi & Otorisasi Role | Selesai |
+| Dashboard Admin (grafik real-time) | Selesai |
+| Dashboard Owner | Selesai |
+| Manajemen Barang (CRUD) | Selesai |
+| Barang Masuk (auto-create supplier & kategori) | Selesai |
+| Barang Keluar (validasi stok) | Selesai |
+| Manajemen Supplier | Selesai |
+| Manajemen Kategori | Selesai |
+| Laporan Barang Masuk | Selesai |
+| Laporan Barang Keluar | Selesai |
+| Laporan Barang Terlaris (filter periode) | Selesai |
+| Kelola User (owner) | Selesai |
+| Linter CI/CD (GitHub Actions) | Selesai |
+| GitFlow & Pull Request | Selesai |
 
 ---
 
@@ -609,13 +607,13 @@ chore(gitignore): tambah file shortcut Windows
 - [x] CI/CD Linter (GitHub Actions) 
 - [x] README lengkap (deskripsi, arsitektur, design pattern, kontribusi, video)
 - [x] Kode terstruktur rapi sesuai Layered Architecture
-- [ ] Folder `docs/` berisi diagram UML & ERD
-- [ ] Link video individu diisi di README
+- [x] Folder `docs/` berisi diagram UML & ERD
+- [x] Link video individu diisi di README
 
 ### Individu (masing-masing anggota)
-- [ ] Video 5-7 menit diunggah ke YouTube (Unlisted) atau Google Drive
-- [ ] Video menampilkan wajah + layar
-- [ ] Video mencakup: commit history, branch feature, PR, demo kode, arsitektur, design pattern, linter
+- [x] Video 5-7 menit diunggah ke YouTube (Unlisted) atau Google Drive
+- [x] Video menampilkan wajah + layar
+- [x] Video mencakup: commit history, branch feature, PR, demo kode, arsitektur, design pattern, linter
 
 ---
 
@@ -628,12 +626,11 @@ chore(gitignore): tambah file shortcut Windows
 | Factory Method (GoF) | [Refactoring.Guru — Factory Method](https://refactoring.guru/design-patterns/factory-method) |
 | Singleton Pattern (GoF) | [Refactoring.Guru — Singleton](https://refactoring.guru/design-patterns/singleton) |
 | Laravel Pint (Linter) | [Laravel Pint Docs](https://laravel.com/docs/pint) |
-| Conventional Commits | [conventionalcommits.org](https://www.conventionalcommits.org) |
-| GitFlow | [Atlassian GitFlow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) |
+| GitFlow | [Atlassian GitFlow](https://github.com/humadev) |
 
 ---
 
 ## 19. Lisensi
 
 Proyek ini dibuat untuk keperluan **Ujian Akhir Semester (UAS) Rekayasa Perangkat Lunak**
-Tahun Akademik 2025/2026 — [Nama Universitas]
+Tahun Akademik 2025/2026 — [Universitas Pendidikan Nasional]
