@@ -22,7 +22,6 @@ class BarangController extends Controller
         // Keluar hari ini: dari tabel transaksi_keluars
         $barangKeluar = TransaksiKeluar::whereDate('created_at', today())->sum('jumlah');
 
-
         $chartMasuk = [];
         $chartKeluar = [];
         for ($i = 6; $i >= 0; $i--) {
@@ -101,7 +100,6 @@ class BarangController extends Controller
         return redirect()->back()->with('success', 'Data master barang berhasil dihapus!');
     }
 
-
     public function indexMasuk()
     {
         $transaksiMasuk = Barang::latest()->get();
@@ -120,12 +118,9 @@ class BarangController extends Controller
             'jumlah' => 'required|numeric|min:1',
         ]);
 
-
         $kategori = Kategori::firstOrCreate(['nama_kategori' => $request->nama_kategori]);
 
-
         $supplier = Supplier::firstOrCreate(['nama_supplier' => $request->nama_supplier]);
-
 
         $barangTerpilih = Barang::where('nama_barang', $request->nama_barang)->first();
 
@@ -149,7 +144,6 @@ class BarangController extends Controller
 
         return redirect()->back()->with('success', 'Mutasi barang masuk berhasil diproses!');
     }
-
 
     public function barangKeluar()
     {
@@ -183,7 +177,6 @@ class BarangController extends Controller
         return redirect()->back()->with('success', 'Stok barang berhasil dikurangi!');
     }
 
-
     public function indexSupplier()
     {
         $suppliers = Supplier::latest()->get();
@@ -203,7 +196,6 @@ class BarangController extends Controller
 
         return redirect()->back()->with('success', 'Supplier berhasil ditambahkan!');
     }
-
 
     public function indexKategori()
     {
