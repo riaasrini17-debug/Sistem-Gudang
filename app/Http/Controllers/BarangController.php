@@ -22,7 +22,7 @@ class BarangController extends Controller
         // Keluar hari ini: dari tabel transaksi_keluars
         $barangKeluar = TransaksiKeluar::whereDate('created_at', today())->sum('jumlah');
 
-        // Data chart 7 hari terakhir
+
         $chartMasuk = [];
         $chartKeluar = [];
         for ($i = 6; $i >= 0; $i--) {
@@ -101,7 +101,7 @@ class BarangController extends Controller
         return redirect()->back()->with('success', 'Data master barang berhasil dihapus!');
     }
 
-    // BARANG MASUK
+
     public function indexMasuk()
     {
         $transaksiMasuk = Barang::latest()->get();
@@ -120,13 +120,13 @@ class BarangController extends Controller
             'jumlah' => 'required|numeric|min:1',
         ]);
 
-        // Auto-simpan Kategori jika belum ada
+
         $kategori = Kategori::firstOrCreate(['nama_kategori' => $request->nama_kategori]);
 
-        // Auto-simpan Supplier jika belum ada
+
         $supplier = Supplier::firstOrCreate(['nama_supplier' => $request->nama_supplier]);
 
-        // Cari atau buat barang
+
         $barangTerpilih = Barang::where('nama_barang', $request->nama_barang)->first();
 
         if ($barangTerpilih) {
@@ -150,7 +150,7 @@ class BarangController extends Controller
         return redirect()->back()->with('success', 'Mutasi barang masuk berhasil diproses!');
     }
 
-    // BARANG KELUAR
+
     public function barangKeluar()
     {
         $transaksiKeluar = TransaksiKeluar::with('barang')->latest()->get();
@@ -183,7 +183,7 @@ class BarangController extends Controller
         return redirect()->back()->with('success', 'Stok barang berhasil dikurangi!');
     }
 
-    // SUPPLIER
+
     public function indexSupplier()
     {
         $suppliers = Supplier::latest()->get();
@@ -204,7 +204,7 @@ class BarangController extends Controller
         return redirect()->back()->with('success', 'Supplier berhasil ditambahkan!');
     }
 
-    // KATEGORI
+
     public function indexKategori()
     {
         $kategoris = Kategori::latest()->get();
