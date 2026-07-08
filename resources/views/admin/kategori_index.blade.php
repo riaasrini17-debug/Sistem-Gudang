@@ -163,29 +163,29 @@
             const inputNama = document.getElementById('input_nama');
             const inputDeskripsi = document.getElementById('input_deskripsi');
 
-            // Tampilkan Modal
+
             modal.classList.remove('hidden');
             modal.classList.add('flex');
             
             if (type === 'edit' && data) {
-                // LOGIKA EDIT
-                modalTitle.innerText = 'Edit Kategori';
-                methodContainer.innerHTML = ''; // Nanti isi @method('PUT') kalau fitur edit diaktifkan
                 
-                // Pastikan rute edit/update kamu sesuaikan nanti
+                modalTitle.innerText = 'Edit Kategori';
+                methodContainer.innerHTML = ''; 
+                
+        
                 form.action = "{{ route('kategori.simpan') }}"; 
                 
                 inputNama.value = data.nama_kategori || '';
                 inputDeskripsi.value = data.deskripsi || '';
             } else {
-                // LOGIKA TAMBAH
+
                 modalTitle.innerText = 'Tambah Kategori';
                 methodContainer.innerHTML = '';
                 
-                // SET ROUTE POST DENGAN KUAT
+
                 form.setAttribute('action', "{{ route('kategori.simpan') }}"); 
                 
-                // Reset isian form
+
                 inputNama.value = '';
                 inputDeskripsi.value = '';
             }
