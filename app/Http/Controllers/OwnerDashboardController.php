@@ -114,7 +114,6 @@ class OwnerDashboardController extends Controller
             'role' => $request->role,
             'password' => bcrypt($request->password),
 
-
         ]);
 
         return redirect()->back()->with('success', 'Akun '.$request->role.' berhasil dibuat.');
@@ -164,23 +163,24 @@ class OwnerDashboardController extends Controller
         return redirect()->route('owner.users')->with('success', "Akun {$user->name} berhasil {$status}.");
     }
 
-
     public function updateUser(Request $request, $id)
     {
         $user = User::findOrFail($id);
 
-        if ($user->role === 'owner') abort(403);
+        if ($user->role === 'owner') {
+            abort(403);
+        }
 
         $request->validate([
-            'name'     => 'required|string|max:255',
-            'email'    => 'required|email|unique:users,email,' . $id,
-            'role'     => 'required|in:admin,staff',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,'.$id,
+            'role' => 'required|in:admin,staff',
             'password' => 'nullable|min:6',
         ]);
 
-        $user->name  = $request->name;
+        $user->name = $request->name;
         $user->email = $request->email;
-        $user->role  = $request->role;
+        $user->role = $request->role;
 
         if ($request->filled('password')) {
             $user->password = bcrypt($request->password);
@@ -195,9 +195,11 @@ class OwnerDashboardController extends Controller
     {
         $user = User::findOrFail($id);
 
-        if ($user->role === 'owner') abort(403);
+        if ($user->role === 'owner') {
+            abort(403);
+        }
 
-        $user->is_active = !$user->is_active;
+        $user->is_active = ! $user->is_active;
         $user->save();
 
         $status = $user->is_active ? 'diaktifkan' : 'dinonaktifkan';
@@ -205,4 +207,3 @@ class OwnerDashboardController extends Controller
         return redirect()->route('owner.users')->with('success', "Akun {$user->name} berhasil {$status}.");
     }
 }
-

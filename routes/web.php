@@ -42,7 +42,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::put('/owner/users/edit/{id}', [OwnerDashboardController::class, 'updateUser'])->name('owner.users.update');
     Route::patch('/owner/users/toggle/{id}', [OwnerDashboardController::class, 'toggleAktifUser'])->name('owner.users.toggle');
 
-
     // ==========================================
     //          -- KHUSUS ROLE: ADMIN --
     // ==========================================
