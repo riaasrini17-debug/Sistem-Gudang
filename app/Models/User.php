@@ -18,19 +18,17 @@ class User extends Authenticatable
         'is_active',
     ];
 
-   
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    
     protected function casts(): array
     {
         return [
             'email_verified_at' => 'datetime',
-            'password'          => 'hashed',
-            'is_active'         => 'boolean',
+            'password' => 'hashed',
+            'is_active' => 'boolean',
         ];
     }
 }

@@ -18,7 +18,7 @@
                 <div class="bg-black p-1.5 rounded-lg">
                     <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
                 </div>
-                <span class="text-xl font-black tracking-tight">StockWise</span>
+                <span class="text-xl font-black tracking-tight">Gudangku</span>
             </div>
 
             <nav class="flex-1 p-4 space-y-1">
@@ -163,29 +163,29 @@
             const inputNama = document.getElementById('input_nama');
             const inputDeskripsi = document.getElementById('input_deskripsi');
 
-            // Tampilkan Modal
+
             modal.classList.remove('hidden');
             modal.classList.add('flex');
             
             if (type === 'edit' && data) {
-                // LOGIKA EDIT
-                modalTitle.innerText = 'Edit Kategori';
-                methodContainer.innerHTML = ''; // Nanti isi @method('PUT') kalau fitur edit diaktifkan
                 
-                // Pastikan rute edit/update kamu sesuaikan nanti
+                modalTitle.innerText = 'Edit Kategori';
+                methodContainer.innerHTML = ''; 
+                
+        
                 form.action = "{{ route('kategori.simpan') }}"; 
                 
                 inputNama.value = data.nama_kategori || '';
                 inputDeskripsi.value = data.deskripsi || '';
             } else {
-                // LOGIKA TAMBAH
+
                 modalTitle.innerText = 'Tambah Kategori';
                 methodContainer.innerHTML = '';
                 
-                // SET ROUTE POST DENGAN KUAT
+
                 form.setAttribute('action', "{{ route('kategori.simpan') }}"); 
                 
-                // Reset isian form
+
                 inputNama.value = '';
                 inputDeskripsi.value = '';
             }

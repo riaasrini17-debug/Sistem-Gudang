@@ -26,8 +26,8 @@
         <aside class="w-64 bg-white border-r border-gray-100 flex flex-col shrink-0">
         <div class="h-16 flex items-center px-6 border-b border-gray-100">
             <div class="flex items-center gap-2 text-gray-900">
-                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
-                <span class="text-xl font-bold tracking-tight">StockWise</span>
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+                <span class="text-xl font-black tracking-tight">Gudangku</span>
             </div>
         </div>
 
@@ -83,7 +83,7 @@
             </div>
         </aside>
 
-        <!-- ================= AREA KANAN ================= -->
+
     <div id="print-area" class="flex-1 flex flex-col overflow-hidden bg-gray-50">
         
         <header class="h-16 bg-white border-b border-gray-100 flex items-center px-6 md:px-8">
@@ -102,14 +102,14 @@
 
         <main class="flex-1 overflow-y-auto p-6 md:p-8">
 
-            {{-- Header khusus cetak --}}
+
             <div id="print-header" class="hidden items-center gap-3 mb-6 pb-4 border-b border-gray-300">
                 <svg class="w-8 h-8 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke-width="2" stroke-linejoin="round"/></svg>
                 <span class="text-xl font-bold tracking-tight text-gray-900">StockWise</span>
                 <span class="ml-auto text-xs text-gray-500">Dicetak pada: {{ now()->format('d M Y, H:i') }}</span>
             </div>
             
-            <!-- Header Halaman & Tombol Cetak -->
+
             <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
                 <div>
                     <h1 class="text-2xl font-bold text-gray-900">Laporan Barang Keluar</h1>
@@ -121,7 +121,7 @@
                 </button>
             </div>
 
-            <!-- Kartu Tabel -->
+
             <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
                 <div class="overflow-x-auto">
                     <table class="w-full text-left text-sm whitespace-nowrap">
@@ -138,7 +138,7 @@
                         <tbody class="divide-y divide-gray-100">
                             
                             @forelse($barangKeluar as $item)
-                            <!-- Baris ini akan muncul kalau database transaksi keluar sudah ada -->
+
                             <tr class="hover:bg-gray-50 transition-colors">
                                 <td class="px-6 py-4 text-gray-500">{{ $item->created_at->format('d M Y, H:i') }}</td>
                                 <td class="px-6 py-4 text-gray-500 font-mono text-xs">BRG-{{ str_pad($item->barang_id, 4, '0', STR_PAD_LEFT) }}</td>
@@ -148,7 +148,7 @@
                                 <td class="px-6 py-4 text-right text-gray-500">Admin</td>
                             </tr>
                             @empty
-                            <!-- Menampilkan pesan kosong kalau belum ada transaksi -->
+
                             <tr>
                                 <td colspan="6" class="px-6 py-16 text-center text-gray-400">
                                     <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-50 mb-4">
