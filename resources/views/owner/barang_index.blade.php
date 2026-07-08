@@ -13,7 +13,7 @@
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans h-screen overflow-hidden flex">
 
-    <!-- ================= SIDEBAR KIRI ================= -->
+
     <aside class="w-64 bg-white border-r border-gray-100 flex flex-col shrink-0">
         <div class="h-16 flex items-center px-6 border-b border-gray-100">
             <div class="flex items-center gap-2 text-gray-900">
@@ -75,10 +75,10 @@
             </div>
         </aside>
 
-    <!-- ================= AREA KANAN (TOPBAR & KONTEN) ================= -->
+
     <div class="flex-1 flex flex-col overflow-hidden bg-gray-50">
         
-        <!-- Topbar -->
+
         <header class="h-16 bg-white border-b border-gray-100 flex items-center px-6 md:px-8">
             <div class="flex items-center gap-4 ml-auto">
                 <div class="flex items-center gap-3 pl-4">
@@ -93,7 +93,7 @@
             </div>
         </header>
 
-        <!-- AREA KONTEN UTAMA (Tabel Daftar Barang) -->
+
         <main class="flex-1 overflow-y-auto p-6 md:p-8">
             
             <div class="mb-6">
@@ -101,7 +101,7 @@
                 <p class="text-sm text-gray-500 mt-1">Pantau seluruh ketersediaan stok barang secara real-time.</p>
             </div>
 
-            <!-- Kartu Tabel -->
+
             <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
                 <div class="overflow-x-auto">
                     <table class="w-full text-left text-sm whitespace-nowrap">
@@ -110,7 +110,7 @@
                                 <th class="px-6 py-4 font-medium">SKU / ID</th>
                                 <th class="px-6 py-4 font-medium">Nama Barang</th>
                                 <th class="px-6 py-4 font-medium text-center">Stok Saat Ini</th>
-                                <!-- Kolom Supplier Baru -->
+
                                 <th class="px-6 py-4 font-medium text-center">Supplier</th>
                                 <th class="px-6 py-4 font-medium text-right">Status</th>
                             </tr>
@@ -123,7 +123,7 @@
                                 <td class="px-6 py-4 font-bold text-gray-900">{{ $item->nama_barang }}</td>
                                 <td class="px-6 py-4 text-center font-bold text-gray-700">{{ $item->stok }}</td>
                                 
-                                <!-- Menampilkan Data Supplier -->
+
                                 <td class="px-6 py-4 text-center text-gray-500">
                                     {{ $item->supplier->nama_supplier ?? 'Supplier Umum' }}
                                 </td>
