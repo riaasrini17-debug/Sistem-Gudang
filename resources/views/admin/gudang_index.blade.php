@@ -14,7 +14,7 @@
 <body class="bg-gray-50 font-sans text-gray-900 h-screen overflow-hidden">
 
     <div class="flex h-full w-full">
-        <!-- ================= SIDEBAR ================= -->
+
         <aside class="w-64 bg-white border-r border-gray-100 flex flex-col shrink-0 h-full">
             <div class="p-6 flex items-center gap-2 border-b border-gray-50">
                 <div class="bg-black p-1.5 rounded-lg">
@@ -61,9 +61,9 @@
             </div>
         </aside>
 
-        <!-- ================= AREA KERJA ================= -->
+
         <main class="flex-1 flex flex-col h-full overflow-hidden">
-            <!-- Header Topbar -->
+
             <header class="h-16 flex items-center justify-between px-8 border-b border-gray-50 bg-white shrink-0">
                 <div class="flex items-center gap-3 flex-1 max-w-sm">
                     <div class="relative w-full">
@@ -84,7 +84,7 @@
 
             <div class="flex-1 p-8 flex gap-8 overflow-hidden bg-gray-50/30">
                 
-                <!-- KOLOM KIRI: TABEL UTAMA -->
+
                 <div class="flex-1 bg-white rounded-[2.5rem] border border-gray-100 shadow-sm flex flex-col overflow-hidden h-full">
                     <div class="flex-1 overflow-y-auto custom-scrollbar">
                         <table class="w-full text-left table-fixed">
@@ -136,7 +136,7 @@
                                 @endforelse
                             </tbody>
                         </table>
-                        <!-- Pesan saat hasil search kosong -->
+
                         <div id="emptySearch" class="hidden py-20 text-center">
                             <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-gray-50 mb-3">
                                 <svg class="w-7 h-7 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-4.35-4.35M17 11A6 6 0 115 11a6 6 0 0112 0z"/></svg>
@@ -151,7 +151,7 @@
         </main>
     </div>
 
-    <!-- Modal Edit (Floating) -->
+
     <div id="editModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50 p-4">
         <div class="bg-white w-full max-w-md rounded-[2.5rem] p-8 shadow-2xl">
             <h3 class="text-lg font-black mb-6">Edit Data Barang</h3>
@@ -173,7 +173,7 @@
     </div>
 
     <script>
-        // ===== SEARCH BARANG =====
+
         document.getElementById('searchBarang').addEventListener('input', function () {
             const keyword = this.value.toLowerCase().trim();
             const rows    = document.querySelectorAll('#tabelBarang tr');
@@ -193,7 +193,7 @@
             document.getElementById('emptySearch').classList.toggle('hidden', visible > 0);
         });
 
-        // ===== MODAL EDIT =====
+
         function openEditModal(barang) {
             document.getElementById('editModal').classList.remove('hidden');
             document.getElementById('editModal').classList.add('flex');

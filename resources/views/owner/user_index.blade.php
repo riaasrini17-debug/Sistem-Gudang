@@ -74,7 +74,7 @@
             </div>
         </aside>
 
-    <!-- ================= AREA KANAN ================= -->
+
     <div class="flex-1 flex flex-col overflow-hidden bg-gray-50">
         
         <header class="h-16 bg-white border-b border-gray-100 flex items-center px-6 md:px-8">
@@ -98,10 +98,10 @@
                 <p class="text-sm text-gray-500 mt-1">Pengaturan &rsaquo; Kelola User</p>
             </div>
 
-            <!-- BUNGKUSAN KONTEN -->
+
             <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden mb-8">
                 
-                <!-- TABEL USER -->
+
                 <div class="overflow-x-auto border-b border-gray-100">
                     <table class="w-full text-left text-sm whitespace-nowrap">
                         <thead class="bg-gray-50 text-gray-500 border-b border-gray-100">
@@ -176,11 +176,11 @@
                     </table>
                 </div>
 
-                <!-- FORM TAMBAH USER BARU -->
+
                 <div class="p-6 bg-gray-50/50">
                     <h3 class="font-bold text-gray-900 mb-4 text-base">Tambah user baru</h3>
                     
-                    <!-- Area Notifikasi Sukses / Error -->
+
                     @if(session('success'))
                         <div class="mb-4 p-3 bg-green-100 border border-green-200 text-green-700 rounded-lg text-sm font-medium">
                             {{ session('success') }}
@@ -197,7 +197,7 @@
                         </div>
                     @endif
 
-                    <!-- Form yang mengarah ke route storeUser -->
+
                     <form action="{{ route('owner.users.store') }}" method="POST" class="space-y-4">
                         @csrf
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -234,12 +234,12 @@
         </main>
     </div>
 
-    <!-- ================= MODAL KONFIRMASI TOGGLE ================= -->
+
     <div id="modal-konfirmasi" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/40 backdrop-blur-sm">
         <div class="bg-white rounded-2xl shadow-xl w-full max-w-sm mx-4 p-6">
             <div class="flex flex-col items-center text-center gap-3 mb-6">
                 <div id="konfirmasi-icon" class="w-14 h-14 rounded-full flex items-center justify-center">
-                    <!-- icon diisi via JS -->
+
                 </div>
                 <h3 id="konfirmasi-judul" class="font-bold text-gray-900 text-base"></h3>
                 <p id="konfirmasi-pesan" class="text-sm text-gray-500 leading-relaxed"></p>
@@ -257,7 +257,7 @@
         </div>
     </div>
 
-    <!-- ================= MODAL EDIT USER ================= -->
+
     <div id="modal-edit" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/40 backdrop-blur-sm">
         <div class="bg-white rounded-2xl shadow-xl w-full max-w-md mx-4 p-6">
             <div class="flex items-center justify-between mb-5">
@@ -355,7 +355,7 @@
             }
         }
 
-        // Tutup modal konfirmasi kalau klik backdrop
+
         document.getElementById('modal-konfirmasi').addEventListener('click', function(e) {
             if (e.target === this) tutupModalKonfirmasi();
         });
@@ -377,7 +377,7 @@
             modal.classList.remove('flex');
         }
 
-        // Tutup modal edit kalau klik backdrop
+
         document.getElementById('modal-edit').addEventListener('click', function(e) {
             if (e.target === this) tutupModalEdit();
         });
