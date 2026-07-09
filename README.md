@@ -561,10 +561,10 @@ chore(gitignore): tambah file shortcut Windows
 | Nama | Link Video | Durasi | Topik yang Dijelaskan |
 |------|-----------|--------|----------------------|
 | Ria | (https://drive.google.com/file/d/1epqvMlMk13S7301g1t_sKcqTRInQW2Cu/view?usp=drive_link) | 5-7 menit | Login, Dashboard Admin & Owner, Strategy Pattern |
-| Nima | (https://youtube.com/...) | 5-7 menit | Barang Masuk & Keluar, Factory Method Pattern |
-| Indri | (https://youtube.com/...) | 5-7 menit | Daftar Barang, Kelola User, CRUD |
-| Dina | (https://youtube.com/...) | 5-7 menit | Supplier, Kategori, Singleton Pattern |
-| Nayge | ](https://youtube.com/...) | 5-7 menit | Laporan Masuk, Keluar, Terlaris & Chart.js |
+| Nima | (https://drive.google.com/file/d/1o3Aw43kQ33iVHM7tkz_mzQx2nVvl6Jn-/view?usp=drive_link) | 5-7 menit | Barang Masuk & Keluar, Factory Method Pattern |
+| Indri | https://drive.google.com/file/d/1xb2wIrPGtk6YlFbgDTAArnMdZvVj2I6F/view?usp=drive_link | 5-7 menit | Daftar Barang, Kelola User, CRUD |
+| Dina | (https://drive.google.com/file/d/14vmaH7lcnRs9xShtOqfOHo6aD6O8_6or/view?usp=drive_link) | 5-7 menit | Supplier, Kategori, Singleton Pattern |
+| Nayge | ](https://drive.google.com/file/d/1R50nTjuc6Kh3Ab4fecetkXHjhP9gFIgZ/view?usp=drive_link) | 5-7 menit | Laporan Masuk, Keluar, Terlaris & Chart.js |
 
 > Setiap video menampilkan wajah (webcam) + layar (screencast) sesuai ketentuan UAS.
 
@@ -573,6 +573,7 @@ chore(gitignore): tambah file shortcut Windows
 ## 15. ERD Sederhana
 
 ![ERD Sistem Gudang](docs/erd.png.jpeg)
+![UML Sistem Gudang](docs/uml.png.jpeg)
 
 ---
 
@@ -623,10 +624,10 @@ chore(gitignore): tambah file shortcut Windows
 |-----------|------|
 | Humadev Design Pattern Repository | https://github.com/humadev/design_pattern |
 | MVC Pattern sebagai referensi pendukung arsitektur Laravel | https://github.com/humadev/design_pattern/tree/main/mvc |
-| Factory Method (GoF) | [Refactoring.Guru — Factory Method](https://refactoring.guru/design-patterns/factory-method) |
-| Singleton Pattern (GoF) | [Refactoring.Guru — Singleton](https://refactoring.guru/design-patterns/singleton) |
-| Laravel Pint (Linter) | [Laravel Pint Docs](https://laravel.com/docs/pint) |
-| GitFlow | [Atlassian GitFlow](https://github.com/humadev) |
+| Factory Method (GoF) | [Refactoring.Guru — Factory Method](https://github.com/humadev/design_pattern/tree/main/gof) |
+| Singleton Pattern (GoF) | [Refactoring.Guru — Singleton](https://github.com/humadev/design_pattern/tree/main/gof) |
+| Laravel Pint (Linter) | [Laravel Pint Docs](https://github.com/humadev/software-construction/tree/main/linter) |
+| GitFlow | [Atlassian GitFlow](https://github.com/humadev/software-construction/tree/main/commit-messages) |
 
 ---
 
