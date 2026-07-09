@@ -624,10 +624,10 @@ chore(gitignore): tambah file shortcut Windows
 |-----------|------|
 | Humadev Design Pattern Repository | https://github.com/humadev/design_pattern |
 | MVC Pattern sebagai referensi pendukung arsitektur Laravel | https://github.com/humadev/design_pattern/tree/main/mvc |
-| Factory Method (GoF) | [Refactoring.Guru — Factory Method](https://github.com/humadev/design_pattern/tree/main/gof) |
-| Singleton Pattern (GoF) | [Refactoring.Guru — Singleton](https://github.com/humadev/design_pattern/tree/main/gof) |
-| Laravel Pint (Linter) | [Laravel Pint Docs](https://github.com/humadev/software-construction/tree/main/linter) |
-| GitFlow | [Atlassian GitFlow](https://github.com/humadev/software-construction/tree/main/commit-messages) |
+| Factory Method (GoF) | [Refactoring.Guru — Factory Method]https://github.com/humadev/design_pattern/tree/main/gof |
+| Singleton Pattern (GoF) | [Refactoring.Guru — Singleton]https://github.com/humadev/design_pattern/tree/main/gof |
+| Laravel Pint (Linter) | [Laravel Pint Docs]https://github.com/humadev/software-construction/tree/main/linter |
+| GitFlow | [Atlassian GitFlow]https://github.com/humadev/software-construction/tree/main/commit-messages |
 
 ---
 
