@@ -459,8 +459,8 @@ php artisan serve
 
 | Role | Email | Password |
 |------|-------|----------|
-| Owner | owner@gudang.com | password |
-| Admin | admin@gudang.com | password |
+| Owner | owner@gudang.com | admin123 |
+| Admin | admin@gudang.com | owner123 |
 
 ---
 
@@ -560,11 +560,11 @@ chore(gitignore): tambah file shortcut Windows
 
 | Nama | Link Video | Durasi | Topik yang Dijelaskan |
 |------|-----------|--------|----------------------|
-| Ria | [▶ Tonton](https://youtube.com/...) | 5-7 menit | Login, Dashboard Admin & Owner, Strategy Pattern |
-| Nima | [▶ Tonton](https://youtube.com/...) | 5-7 menit | Barang Masuk & Keluar, Factory Method Pattern |
-| Indri | [▶ Tonton](https://youtube.com/...) | 5-7 menit | Daftar Barang, Kelola User, CRUD |
-| Dina | [▶ Tonton](https://youtube.com/...) | 5-7 menit | Supplier, Kategori, Singleton Pattern |
-| Nayge | [▶ Tonton](https://youtube.com/...) | 5-7 menit | Laporan Masuk, Keluar, Terlaris & Chart.js |
+| Ria | (https://drive.google.com/file/d/1epqvMlMk13S7301g1t_sKcqTRInQW2Cu/view?usp=drive_link) | 5-7 menit | Login, Dashboard Admin & Owner, Strategy Pattern |
+| Nima | (https://youtube.com/...) | 5-7 menit | Barang Masuk & Keluar, Factory Method Pattern |
+| Indri | (https://youtube.com/...) | 5-7 menit | Daftar Barang, Kelola User, CRUD |
+| Dina | (https://youtube.com/...) | 5-7 menit | Supplier, Kategori, Singleton Pattern |
+| Nayge | ](https://youtube.com/...) | 5-7 menit | Laporan Masuk, Keluar, Terlaris & Chart.js |
 
 > Setiap video menampilkan wajah (webcam) + layar (screencast) sesuai ketentuan UAS.
 
